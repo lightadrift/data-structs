@@ -52,7 +52,23 @@ public:
       temp->next = temp2->next;
       temp2->next = temp;
     }
-  }
+  };
+
+  void deleteAt(int pos) {
+    Node *temp = head;
+    if (pos == 1) {
+      head = temp->next;
+      delete (temp);
+      return;
+    }
+
+    for (int i = 0; i < pos - 2; i++) {
+      temp = temp->next;
+    }
+    Node *temp2 = temp->next;
+    temp->next = temp2->next;
+    delete temp2;
+  };
 
   void traverseLinkedList() {
     Node *temp = head;
@@ -83,6 +99,9 @@ int main() {
   list->insertAtBeginning(16);
   list->insert(24, 3);
   list->insert(5, 3);
+  list->traverseLinkedList();
+  printf("test \n");
+  list->deleteAt(1);
   list->traverseLinkedList();
   return 0;
 };
