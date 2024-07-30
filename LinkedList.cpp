@@ -69,7 +69,21 @@ public:
     temp->next = temp2->next;
     delete temp2;
   };
+  void reverse() {
+    Node *temp = head;
+    Node *prev = nullptr, *next = nullptr;
 
+    if (head == nullptr || getListLength() == 1) {
+      return;
+    }
+    while (temp != nullptr) {
+      next = temp->next;
+      temp->next = prev;
+      prev = temp;
+      temp = next;
+    }
+    head = prev;
+  }
   void traverseLinkedList() {
     Node *temp = head;
     while (temp != nullptr) {
@@ -102,6 +116,8 @@ int main() {
   list->traverseLinkedList();
   printf("test \n");
   list->deleteAt(1);
+  list->traverseLinkedList();
+  list->reverse();
   list->traverseLinkedList();
   return 0;
 };
