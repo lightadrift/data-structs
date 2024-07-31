@@ -65,6 +65,43 @@ public:
     current->next = temp;
     temp->prev = current;
   }
+
+  void insert(int value, int pos) {
+
+    if (pos > getLength() - 1) {
+      std::cout << "pos out of range. no changes to the list" << std::endl;
+      return;
+    }
+
+    Node *temp = new Node(value);
+    if (head == nullptr) {
+      head = temp;
+      return;
+    }
+    if (pos == 0) {
+      head->prev = temp;
+      temp->next = head;
+      return;
+    }
+
+    Node *current = head;
+
+    for (int i = 0; i < pos - 1; i++) {
+      if (current == nullptr) {
+        return;
+      }
+      current = current->next;
+    }
+
+    temp->next = current->next;
+
+    temp->prev = current;
+    if (current->next != nullptr) {
+      current->next->prev = temp;
+    }
+
+    current->next = temp;
+  }
 };
 
 int main() {
@@ -74,6 +111,7 @@ int main() {
   list->insertAtBeginning(12);
   list->insertAtTail(8);
   list->printList();
-
+  list->insert(30, 4);
+  list->printList();
   return 0;
 }
