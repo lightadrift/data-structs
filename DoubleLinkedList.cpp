@@ -102,6 +102,34 @@ public:
 
     current->next = temp;
   }
+
+  void deleteAt(int pos) {
+    if (!head) {
+      return;
+    }
+    if (pos > getLength() - 1) {
+      return;
+    }
+
+    Node *current = head;
+
+    for (int i = 0; i < pos - 1; i++) {
+      current = current->next;
+    }
+
+    if (current->prev) {
+      current->prev->next = current->next;
+    }
+    if (current->next) {
+      current->next->prev = current->prev;
+    }
+
+    if (head == current) {
+      head = current;
+    }
+
+    delete current;
+  }
 };
 
 int main() {
@@ -111,7 +139,9 @@ int main() {
   list->insertAtBeginning(12);
   list->insertAtTail(8);
   list->printList();
-  list->insert(30, 4);
+  list->insert(30, 2);
+  list->printList();
+  list->deleteAt(3);
   list->printList();
   return 0;
-}
+};
